@@ -1,0 +1,8 @@
+E:\codeDZB\MCUXpressoIDE_11.9.0_2144\workspace\frdmmcxn947_lwip_ping_freertos\drivers/fsl_clock.h:1389:20:CLOCK_EnableClock	0	static
+../source/lwip_ping_freertos.c:171:13:client	64	static
+../source/lwip_ping_freertos.c:161:17:MDIO_Write	8	static
+../source/lwip_ping_freertos.c:166:17:MDIO_Read	8	static
+../source/lwip_ping_freertos.c:155:13:MDIO_Init	8	static
+../source/lwip_ping_freertos.c:206:6:client_init	16	static
+../source/lwip_ping_freertos.c:215:13:stack_init	80	static
+../source/lwip_ping_freertos.c:280:5:main	16	static
