@@ -1,0 +1,10 @@
+../touch/source/keydetectors/nt_keydetector_usafa.c:58:16:_nt_keydetector_usafa_rom_check	0	static
+../touch/source/keydetectors/nt_keydetector_usafa.c:398:13:_nt_keydetector_usafa_lock_baseline	8	static
+../touch/source/keydetectors/nt_keydetector_usafa.c:409:13:_nt_keydetector_usafa_unlock_baseline	8	static
+../touch/source/keydetectors/nt_keydetector_usafa.c:159:13:_nt_reset_keydetector_usafa_reset	40	static
+../touch/source/keydetectors/nt_keydetector_usafa.c:513:13:_nt_keydetector_usafa_reset	8	static
+../touch/source/keydetectors/nt_keydetector_usafa.c:435:13:_nt_keydetector_usafa_signal_track	32	static
+../touch/source/keydetectors/nt_keydetector_usafa.c:129:13:_nt_keydetector_usafa_measure	40	static
+../touch/source/keydetectors/nt_keydetector_usafa.c:113:13:_nt_keydetector_usafa_enable	8	static
+../touch/source/keydetectors/nt_keydetector_usafa.c:220:13:_nt_keydetector_usafa_process	48	static
+../touch/source/keydetectors/nt_keydetector_usafa.c:63:16:_nt_keydetector_usafa_init	32	static

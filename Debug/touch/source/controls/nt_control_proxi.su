@@ -1,0 +1,6 @@
+e:\codedzb\mcuxpressoide_11.9.0_2144\workspace\frdmmcxn947_lwip_ping_freertos\touch\source\controls\nt_controls_prv.h:258:24:_nt_control_get_flag	32	static
+../touch/source/controls/nt_control_proxi.c:50:13:_nt_control_proxi_invoke_callback	40	static
+../touch/source/controls/nt_control_proxi.c:167:16:_nt_control_proxi_process	48	static
+../touch/source/controls/nt_control_proxi.c:87:16:_nt_control_proxi_init	32	static
+../touch/source/controls/nt_control_proxi.c:36:6:nt_control_proxi_register_callback	32	static
+../touch/source/controls/nt_control_proxi.c:64:9:nt_control_proxi_set_gesture	32	static

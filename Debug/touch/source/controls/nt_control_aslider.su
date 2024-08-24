@@ -1,0 +1,13 @@
+../touch/source/controls/nt_control_aslider.c:192:17:_nt_control_aslider_calculate_position	32	static
+e:\codedzb\mcuxpressoide_11.9.0_2144\workspace\frdmmcxn947_lwip_ping_freertos\touch\source\controls\nt_controls_prv.h:258:24:_nt_control_get_flag	32	static
+../touch/source/controls/nt_control_aslider.c:120:13:_nt_control_aslider_invoke_callback	40	static
+../touch/source/controls/nt_control_aslider.c:208:13:_nt_control_aslider_process_all_released	32	static
+../touch/source/controls/nt_control_aslider.c:133:16:_nt_control_aslider_get_base_data	32	static
+../touch/source/controls/nt_control_aslider.c:259:16:_nt_control_aslider_process	48	static
+../touch/source/controls/nt_control_aslider.c:223:16:_nt_control_aslider_init	24	static
+../touch/source/controls/nt_control_aslider.c:44:6:nt_control_aslider_register_callback	32	static
+../touch/source/controls/nt_control_aslider.c:58:10:nt_control_aslider_get_position	24	static
+../touch/source/controls/nt_control_aslider.c:72:10:nt_control_aslider_is_touched	24	static
+../touch/source/controls/nt_control_aslider.c:84:10:nt_control_aslider_movement_detected	24	static
+../touch/source/controls/nt_control_aslider.c:96:10:nt_control_aslider_get_direction	24	static
+../touch/source/controls/nt_control_aslider.c:108:10:nt_control_aslider_get_invalid_position	24	static

@@ -9,6 +9,16 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include utilities/subdir.mk
+-include touch/source/xtalk/subdir.mk
+-include touch/source/system/subdir.mk
+-include touch/source/safety/subdir.mk
+-include touch/source/modules/subdir.mk
+-include touch/source/keydetectors/subdir.mk
+-include touch/source/filters/subdir.mk
+-include touch/source/electrodes/subdir.mk
+-include touch/source/drivers/tsi/subdir.mk
+-include touch/source/controls/subdir.mk
+-include touch/source/subdir.mk
 -include startup/subdir.mk
 -include source/subdir.mk
 -include phy/subdir.mk
@@ -23,11 +33,14 @@ RM := rm -rf
 -include freertos/freertos-kernel/portable/MemMang/subdir.mk
 -include freertos/freertos-kernel/portable/GCC/ARM_CM33_NTZ/non_secure/subdir.mk
 -include freertos/freertos-kernel/subdir.mk
+-include freemaster/drivers/subdir.mk
+-include freemaster/subdir.mk
 -include drivers/flash/src/subdir.mk
 -include drivers/subdir.mk
 -include device/subdir.mk
 -include component/uart/subdir.mk
 -include component/silicon_id/subdir.mk
+-include component/p3t1755/subdir.mk
 -include component/lists/subdir.mk
 -include component/gpio/subdir.mk
 -include board/subdir.mk
@@ -63,7 +76,7 @@ main-build: frdmmcxn947_lwip_ping_freertos.axf
 frdmmcxn947_lwip_ping_freertos.axf: $(OBJS) $(USER_OBJS) makefile $(OPTIONAL_TOOL_DEPS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: MCU Linker'
-	arm-none-eabi-gcc -nostdlib -Xlinker -no-warn-rwx-segments -Xlinker -Map="frdmmcxn947_lwip_ping_freertos.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -Xlinker --sort-section=alignment -Xlinker --cref -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -T frdmmcxn947_lwip_ping_freertos_Debug.ld -o "frdmmcxn947_lwip_ping_freertos.axf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-gcc -nostdlib -Xlinker -no-warn-rwx-segments -Xlinker -Map="frdmmcxn947_lwip_ping_freertos.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -Xlinker --sort-section=alignment -Xlinker --cref -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -T frdmmcxn947_lwip_ping_freertos_Debug.ld -u _printf_float -u _scanf_float -o "frdmmcxn947_lwip_ping_freertos.axf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

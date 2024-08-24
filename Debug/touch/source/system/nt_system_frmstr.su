@@ -1,0 +1,3 @@
+../touch/source/system/nt_system_frmstr.c:80:1:FMSTR_TsaGetTable_nt_frmstr_tsa_table	0	static
+../touch/source/system/nt_system_frmstr.c:589:9:_nt_freemaster_init	8	static
+../touch/source/system/nt_system_frmstr.c:606:9:_nt_freemaster_add_variable	16	static

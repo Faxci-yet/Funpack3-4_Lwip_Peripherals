@@ -1,0 +1,13 @@
+e:\codedzb\mcuxpressoide_11.9.0_2144\workspace\frdmmcxn947_lwip_ping_freertos\touch\source\controls\nt_controls_prv.h:258:24:_nt_control_get_flag	32	static
+../touch/source/controls/nt_control_matrix.c:66:13:_nt_control_matrix_invoke_callback	40	static
+../touch/source/controls/nt_control_matrix.c:52:6:nt_control_matrix_register_callback	32	static
+../touch/source/controls/nt_control_matrix.c:80:9:nt_control_matrix_set_gesture	32	static
+../touch/source/controls/nt_control_matrix.c:114:6:_nt_control_matrix_get_position	24	static
+../touch/source/controls/nt_control_matrix.c:172:10:_nt_control_matrix_gesture_recognition_square	32	static
+../touch/source/controls/nt_control_matrix.c:263:10:_nt_control_matrix_horiz_vertic_recognition	40	static
+../touch/source/controls/nt_control_matrix.c:335:41:_nt_control_matrix_zoom_recognition	48	static
+../touch/source/controls/nt_control_matrix.c:924:6:_nt_control_matrix_clean	0	static
+../touch/source/controls/nt_control_matrix.c:403:16:_nt_control_matrix_init	40	static
+../touch/source/controls/nt_control_matrix.c:936:6:_nt_control_matrix_copy	0	static
+../touch/source/controls/nt_control_matrix.c:948:6:_nt_control_matrix_copy_64	0	static
+../touch/source/controls/nt_control_matrix.c:512:16:_nt_control_matrix_process	72	static

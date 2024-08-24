@@ -1,0 +1,9 @@
+../drivers/fsl_crc.c:149:13:CRC_ConfigureAndStart	0	static
+../drivers/fsl_crc.c:184:13:CRC_SetProtocolConfig	24	static
+../drivers/fsl_crc.c:208:13:CRC_SetRawProtocolConfig	24	static
+../drivers/fsl_crc.c:97:17:CRC_GetInstance	8	static
+../drivers/fsl_crc.c:232:6:CRC_Init	16	static
+../drivers/fsl_crc.c:270:6:CRC_GetDefaultConfig	8	static
+../drivers/fsl_crc.c:295:6:CRC_WriteData	0	static
+../drivers/fsl_crc.c:336:10:CRC_Get32bitResult	0	static
+../drivers/fsl_crc.c:350:10:CRC_Get16bitResult	0	static

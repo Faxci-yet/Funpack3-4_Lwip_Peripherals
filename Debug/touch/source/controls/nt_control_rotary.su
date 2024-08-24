@@ -1,0 +1,13 @@
+../touch/source/controls/nt_control_rotary.c:109:13:_nt_control_rotary_calc_dynamic	32	static
+e:\codedzb\mcuxpressoide_11.9.0_2144\workspace\frdmmcxn947_lwip_ping_freertos\touch\source\controls\nt_controls_prv.h:258:24:_nt_control_get_flag	32	static
+../touch/source/controls/nt_control_rotary.c:133:13:_nt_control_rotary_adjust_direction	32	static
+../touch/source/controls/nt_control_rotary.c:96:13:_nt_control_rotary_invoke_callback	40	static
+../touch/source/controls/nt_control_rotary.c:155:13:_nt_control_rotary_calc_position	40	static
+../touch/source/controls/nt_control_rotary.c:218:16:_nt_control_rotary_process	48	static
+../touch/source/controls/nt_control_rotary.c:198:16:_nt_control_rotary_init	24	static
+../touch/source/controls/nt_control_rotary.c:40:6:nt_control_rotary_register_callback	32	static
+../touch/source/controls/nt_control_rotary.c:54:10:nt_control_rotary_get_position	24	static
+../touch/source/controls/nt_control_rotary.c:68:10:nt_control_rotary_is_touched	24	static
+../touch/source/controls/nt_control_rotary.c:75:10:nt_control_rotary_movement_detected	24	static
+../touch/source/controls/nt_control_rotary.c:82:10:nt_control_rotary_get_direction	24	static
+../touch/source/controls/nt_control_rotary.c:89:10:nt_control_rotary_get_invalid_position	24	static

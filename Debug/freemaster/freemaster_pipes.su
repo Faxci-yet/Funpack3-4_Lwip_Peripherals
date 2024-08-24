@@ -1,0 +1,11 @@
+../freemaster/freemaster_pipes.c:1995:13:FMSTR_PipeOpen	0	static
+../freemaster/freemaster_pipes.c:2016:6:FMSTR_PipeClose	0	static
+../freemaster/freemaster_pipes.c:2021:17:FMSTR_PipeWrite	0	static
+../freemaster/freemaster_pipes.c:2034:17:FMSTR_PipeRead	0	static
+../freemaster/freemaster_pipes.c:2053:12:FMSTR_PipePrintfU8	0	static
+../freemaster/freemaster_pipes.c:2062:12:FMSTR_PipePrintfS8	0	static
+../freemaster/freemaster_pipes.c:2071:12:FMSTR_PipePrintfU16	0	static
+../freemaster/freemaster_pipes.c:2080:12:FMSTR_PipePrintfS16	0	static
+../freemaster/freemaster_pipes.c:2089:12:FMSTR_PipePrintfU32	0	static
+../freemaster/freemaster_pipes.c:2098:12:FMSTR_PipePrintfS32	0	static
+../freemaster/freemaster_pipes.c:2111:12:FMSTR_PipePrintf	0	static

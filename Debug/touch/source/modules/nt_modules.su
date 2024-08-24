@@ -1,0 +1,15 @@
+../touch/source/modules/nt_modules.c:27:16:_nt_module_data_check	0	static
+e:\codedzb\mcuxpressoide_11.9.0_2144\workspace\frdmmcxn947_lwip_ping_freertos\touch\source\modules\nt_modules_prv.h:186:20:_nt_module_set_flag	32	static
+../touch/source/modules/nt_modules.c:88:16:_nt_module_init_electrode	32	static
+../touch/source/modules/nt_modules.c:41:10:_nt_module_count_electrodes	0	static
+../touch/source/modules/nt_modules.c:52:10:_nt_module_get_electrodes_state	40	static
+../touch/source/modules/nt_modules.c:68:24:_nt_module_get_data	32	static
+../touch/source/modules/nt_modules.c:119:24:_nt_module_init	40	static
+../touch/source/modules/nt_modules.c:242:9:_nt_module_trigger	24	static
+../touch/source/modules/nt_modules.c:269:9:_nt_module_process_safety	32	static
+../touch/source/modules/nt_modules.c:301:9:_nt_module_process	40	static
+../touch/source/modules/nt_modules.c:338:10:nt_module_recalibrate	32	static
+../touch/source/modules/nt_modules.c:351:9:nt_module_change_mode	80	static
+../touch/source/modules/nt_modules.c:415:9:nt_module_load_configuration	40	static
+../touch/source/modules/nt_modules.c:438:9:nt_module_save_configuration	40	static
+../touch/source/modules/nt_modules.c:461:9:_nt_module_check_signal_levels	32	static

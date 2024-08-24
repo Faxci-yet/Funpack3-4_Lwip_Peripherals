@@ -1,0 +1,13 @@
+../touch/source/modules/nt_module_gpioint.c:111:16:_nt_module_gpioint_electrode_enable	0	static
+../touch/source/modules/nt_module_gpioint.c:120:16:_nt_module_gpioint_electrode_disable	0	static
+../touch/source/modules/nt_module_gpioint.c:146:16:nt_module_gpioint_check_interface	0	static
+../touch/source/modules/nt_module_gpioint.c:191:16:nt_module_gpioint_data_check	8	static
+../touch/source/modules/nt_module_gpioint.c:204:13:nt_module_gpioint_start_channel	16	static
+../touch/source/modules/nt_module_gpioint.c:81:16:_nt_module_gpioint_trigger	8	static
+../touch/source/modules/nt_module_gpioint.c:223:13:nt_module_gpioint_stop_channel	16	static
+../touch/source/modules/nt_module_gpioint.c:129:16:_nt_module_gpioint_change_mode	32	static
+e:\codedzb\mcuxpressoide_11.9.0_2144\workspace\frdmmcxn947_lwip_ping_freertos\touch\source\modules\nt_modules_prv.h:186:20:_nt_module_set_flag	32	static
+../touch/source/modules/nt_module_gpioint.c:96:16:_nt_module_gpioint_process	24	static
+../touch/source/modules/nt_module_gpioint.c:50:16:_nt_module_gpioint_init	16	static
+../touch/source/modules/nt_module_gpioint.c:235:6:nt_module_gpioint_isr	40	static
+../touch/source/modules/nt_module_gpioint.c:266:6:nt_module_gpioint_overflow_isr	32	static

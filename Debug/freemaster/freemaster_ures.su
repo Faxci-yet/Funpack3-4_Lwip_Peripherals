@@ -1,0 +1,5 @@
+../freemaster/freemaster_ures.c:46:27:_FMSTR_FindUresInTsaInternal	8	static
+../freemaster/freemaster_ures.c:129:19:_FMSTR_UresControlRead	56	static
+../freemaster/freemaster_ures.c:300:19:_FMSTR_UresControlIoctl	64	static
+../freemaster/freemaster_ures.c:225:19:_FMSTR_UresControlWrite	64	static
+../freemaster/freemaster_ures.c:65:12:FMSTR_UresControl	32	static

@@ -1,0 +1,9 @@
+../touch/source/keydetectors/nt_keydetector_mbw.c:62:16:_nt_keydetector_mbw_rom_check	0	static
+../touch/source/keydetectors/nt_keydetector_mbw.c:174:17:find_median	16	static
+../touch/source/keydetectors/nt_keydetector_mbw.c:453:13:_nt_reset_keydetector_mbw_reset	40	static
+../touch/source/keydetectors/nt_keydetector_mbw.c:707:13:_nt_keydetector_mbw_reset	8	static
+../touch/source/keydetectors/nt_keydetector_mbw.c:641:13:_nt_keydetector_mbw_signal_track	32	static
+../touch/source/keydetectors/nt_keydetector_mbw.c:223:13:_nt_keydetector_mbw_measure	56	static
+../touch/source/keydetectors/nt_keydetector_mbw.c:509:13:_nt_keydetector_mbw_process	48	static
+../touch/source/keydetectors/nt_keydetector_mbw.c:158:13:_nt_keydetector_mbw_enable	8	static
+../touch/source/keydetectors/nt_keydetector_mbw.c:67:16:_nt_keydetector_mbw_init	40	static

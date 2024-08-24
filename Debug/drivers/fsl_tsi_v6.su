@@ -1,0 +1,13 @@
+../drivers/fsl_clock.h:1389:20:CLOCK_EnableClock	0	static
+../drivers/fsl_clock.h:1418:20:CLOCK_DisableClock	0	static
+../drivers/fsl_tsi_v6.h:871:20:TSI_SetSelfCapMeasuredChannel	8	static
+../drivers/fsl_tsi_v6.c:34:10:TSI_GetInstance	8	static
+../drivers/fsl_tsi_v6.c:61:6:TSI_InitSelfCapMode	16	static
+../drivers/fsl_tsi_v6.c:131:6:TSI_InitMutualCapMode	16	static
+../drivers/fsl_tsi_v6.c:205:6:TSI_Deinit	8	static
+../drivers/fsl_tsi_v6.c:246:6:TSI_GetSelfCapModeDefaultConfig	8	static
+../drivers/fsl_tsi_v6.c:300:6:TSI_GetMutualCapModeDefaultConfig	8	static
+../drivers/fsl_tsi_v6.c:383:6:TSI_EnableInterrupts	0	static
+../drivers/fsl_tsi_v6.c:408:6:TSI_DisableInterrupts	0	static
+../drivers/fsl_tsi_v6.c:434:6:TSI_ClearStatusFlags	0	static
+../drivers/fsl_tsi_v6.c:344:6:TSI_SelfCapCalibrate	24	static

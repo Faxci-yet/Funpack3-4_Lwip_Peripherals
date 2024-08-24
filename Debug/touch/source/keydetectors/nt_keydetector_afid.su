@@ -1,0 +1,9 @@
+../touch/source/keydetectors/nt_keydetector_afid.c:36:16:_nt_keydetector_afid_rom_check	0	static
+../touch/source/keydetectors/nt_keydetector_afid.c:53:13:_nt_keydetector_afid_asc_init	0	static
+../touch/source/keydetectors/nt_keydetector_afid.c:58:13:_nt_keydetector_afid_asc_track	0	static
+../touch/source/keydetectors/nt_keydetector_afid.c:66:13:_nt_keydetector_afid_asc_process	4	static
+../touch/source/keydetectors/nt_keydetector_afid.c:299:13:_nt_keydetector_afid_reset	24	static
+../touch/source/keydetectors/nt_keydetector_afid.c:138:13:_nt_keydetector_afid_measure	48	static
+../touch/source/keydetectors/nt_keydetector_afid.c:237:13:_nt_keydetector_afid_process	40	static
+../touch/source/keydetectors/nt_keydetector_afid.c:115:13:_nt_keydetector_afid_enable	16	static
+../touch/source/keydetectors/nt_keydetector_afid.c:94:16:_nt_keydetector_afid_init	32	static

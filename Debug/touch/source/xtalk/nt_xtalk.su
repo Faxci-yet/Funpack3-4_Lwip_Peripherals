@@ -1,0 +1,15 @@
+../touch/source/xtalk/nt_xtalk.c:18:9:nt_mult_16	0	static
+../touch/source/xtalk/nt_xtalk.c:76:9:_nt_system_xtalk_electrode_init	32	static
+../touch/source/xtalk/nt_xtalk.c:148:6:nt_xtalk_reduction	12	static
+../touch/source/xtalk/nt_xtalk.c:168:6:nt_xtalk_get_act_to_conf_gain	0	static
+../touch/source/xtalk/nt_xtalk.c:178:6:nt_xtalk_find_max_ind	24	static
+../touch/source/xtalk/nt_xtalk.c:216:6:nt_xtalk_get_adjoint_col_0	64	static
+../touch/source/xtalk/nt_xtalk.c:292:6:nt_xtalk_get_confusion_submat	16	static
+../touch/source/xtalk/nt_xtalk.c:305:6:nt_xtalk_get_transform	24	static
+../touch/source/xtalk/nt_xtalk.c:350:9:nt_xtalk_get_activation	16	static
+../touch/source/xtalk/nt_xtalk.c:362:6:xtalk_rest_transform	4	static
+../touch/source/xtalk/nt_xtalk.c:371:6:nt_xtalk_optimize_transform	16	static
+../touch/source/xtalk/nt_xtalk.c:32:9:_nt_system_xtalk_init	40	static
+../touch/source/xtalk/nt_xtalk.c:396:6:nt_xtalk_optimize_transform_step	16	static
+../touch/source/xtalk/nt_xtalk.c:431:10:nt_xtalk_adapt_model_process	40	static
+../touch/source/xtalk/nt_xtalk.c:89:9:_nt_system_xtalk_process	16	static

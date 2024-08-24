@@ -1,0 +1,4 @@
+../touch/source/nt.c:45:9:nt_trigger	8	static
+../touch/source/nt.c:67:9:nt_task	8	static
+../touch/source/nt.c:97:6:nt_error	8	static
+../touch/source/nt.c:12:9:nt_init	24	static

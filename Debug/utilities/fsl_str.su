@@ -17,6 +17,6 @@
 ../utilities/fsl_str.c:1079:16:StrFormatScanGetBase	0	static
 ../utilities/fsl_str.c:1102:16:StrFormatScanCheckSymbol	0	static
 ../utilities/fsl_str.c:1123:16:StrFormatScanFillInteger	0	static
-../utilities/fsl_str.c:1224:16:StrFormatScanfStringHandling	40	static
+../utilities/fsl_str.c:1224:16:StrFormatScanfStringHandling	32	static
 ../utilities/fsl_str.c:768:5:StrFormatPrintf	128	static
 ../utilities/fsl_str.c:1393:5:StrFormatScanf	64	static

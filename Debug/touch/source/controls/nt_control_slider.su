@@ -1,0 +1,12 @@
+e:\codedzb\mcuxpressoide_11.9.0_2144\workspace\frdmmcxn947_lwip_ping_freertos\touch\source\controls\nt_controls_prv.h:258:24:_nt_control_get_flag	32	static
+../touch/source/controls/nt_control_slider.c:115:13:_nt_control_slider_invoke_callback	40	static
+../touch/source/controls/nt_control_slider.c:128:13:_nt_control_slider_calc_dynamic	32	static
+../touch/source/controls/nt_control_slider.c:153:13:_nt_control_slider_calc_position	8	static
+../touch/source/controls/nt_control_slider.c:191:16:_nt_control_slider_process	48	static
+../touch/source/controls/nt_control_slider.c:171:16:_nt_control_slider_init	24	static
+../touch/source/controls/nt_control_slider.c:39:6:nt_control_slider_register_callback	32	static
+../touch/source/controls/nt_control_slider.c:53:10:nt_control_slider_get_position	24	static
+../touch/source/controls/nt_control_slider.c:67:10:nt_control_slider_is_touched	24	static
+../touch/source/controls/nt_control_slider.c:79:10:nt_control_slider_movement_detected	24	static
+../touch/source/controls/nt_control_slider.c:91:10:nt_control_slider_get_direction	24	static
+../touch/source/controls/nt_control_slider.c:103:10:nt_control_slider_get_invalid_position	24	static

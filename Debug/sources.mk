@@ -17,11 +17,14 @@ SUBDIRS := \
 board \
 component/gpio \
 component/lists \
+component/p3t1755 \
 component/silicon_id \
 component/uart \
 device \
 drivers/flash/src \
 drivers \
+freemaster/drivers \
+freemaster \
 freertos/freertos-kernel \
 freertos/freertos-kernel/portable/GCC/ARM_CM33_NTZ/non_secure \
 freertos/freertos-kernel/portable/MemMang \
@@ -36,5 +39,15 @@ lwip/src/netif/ppp \
 phy \
 source \
 startup \
+touch/source/controls \
+touch/source/drivers/tsi \
+touch/source/electrodes \
+touch/source/filters \
+touch/source/keydetectors \
+touch/source/modules \
+touch/source \
+touch/source/safety \
+touch/source/system \
+touch/source/xtalk \
 utilities \
 

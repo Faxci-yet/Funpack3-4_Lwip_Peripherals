@@ -1,0 +1,12 @@
+E:\codeDZB\MCUXpressoIDE_11.9.0_2144\workspace\frdmmcxn947_lwip_ping_freertos\CMSIS/core_cm33.h:2378:22:__NVIC_EnableIRQ	0	static
+E:\codeDZB\MCUXpressoIDE_11.9.0_2144\workspace\frdmmcxn947_lwip_ping_freertos\CMSIS/core_cm33.h:2416:22:__NVIC_DisableIRQ	0	static
+../touch/source/drivers/tsi/nt_drv_tsi_driver.c:43:14:NT_TSI_DRV_Init	40	static
+../touch/source/drivers/tsi/nt_drv_tsi_driver.c:124:14:NT_TSI_DRV_DeInit	32	static
+../touch/source/drivers/tsi/nt_drv_tsi_driver.c:161:14:NT_TSI_DRV_SetCallBackFunc	32	static
+../touch/source/drivers/tsi/nt_drv_tsi_driver.c:191:10:NT_TSI_DRV_GetEnabledElectrodes	24	static
+../touch/source/drivers/tsi/nt_drv_tsi_driver.c:206:14:NT_TSI_DRV_GetStatus	24	static
+../touch/source/drivers/tsi/nt_drv_tsi_driver.c:219:14:NT_TSI_DRV_DisableLowPower	40	static
+../touch/source/drivers/tsi/nt_drv_tsi_driver.c:260:16:NT_TSI_DRV_GetMode	24	static
+../touch/source/drivers/tsi/nt_drv_tsi_driver.c:273:14:NT_TSI_DRV_SaveConfiguration	32	static
+../touch/source/drivers/tsi/nt_drv_tsi_driver.c:300:14:NT_TSI_DRV_Suspend	24	static
+../touch/source/drivers/tsi/nt_drv_tsi_driver.c:316:14:NT_TSI_DRV_Resume	24	static

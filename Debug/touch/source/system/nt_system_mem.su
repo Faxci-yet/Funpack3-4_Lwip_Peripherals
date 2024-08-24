@@ -1,0 +1,4 @@
+../touch/source/system/nt_system_mem.c:12:9:_nt_mem_init	16	static
+../touch/source/system/nt_system_mem.c:50:7:_nt_mem_alloc	8	static
+../touch/source/system/nt_system_mem.c:86:10:nt_mem_get_free_size	24	static
+../touch/source/system/nt_system_mem.c:100:9:_nt_mem_deinit	8	static

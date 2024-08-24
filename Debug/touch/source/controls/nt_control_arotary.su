@@ -1,0 +1,13 @@
+../touch/source/controls/nt_control_arotary.c:206:17:_nt_control_arotary_calculate_position	32	static
+e:\codedzb\mcuxpressoide_11.9.0_2144\workspace\frdmmcxn947_lwip_ping_freertos\touch\source\controls\nt_controls_prv.h:258:24:_nt_control_get_flag	32	static
+../touch/source/controls/nt_control_arotary.c:120:13:_nt_control_arotary_invoke_callback	40	static
+../touch/source/controls/nt_control_arotary.c:230:13:__nt_control_arotary_process_all_released	32	static
+../touch/source/controls/nt_control_arotary.c:133:16:_nt_control_arotary_get_base_data	32	static
+../touch/source/controls/nt_control_arotary.c:282:16:_nt_control_arotary_process	40	static
+../touch/source/controls/nt_control_arotary.c:246:16:_nt_control_arotary_init	24	static
+../touch/source/controls/nt_control_arotary.c:44:6:nt_control_arotary_register_callback	32	static
+../touch/source/controls/nt_control_arotary.c:58:10:nt_control_arotary_get_position	24	static
+../touch/source/controls/nt_control_arotary.c:72:10:nt_control_arotary_is_touched	24	static
+../touch/source/controls/nt_control_arotary.c:84:10:nt_control_arotary_movement_detected	24	static
+../touch/source/controls/nt_control_arotary.c:96:10:nt_control_arotary_get_direction	24	static
+../touch/source/controls/nt_control_arotary.c:108:10:nt_control_arotary_get_invalid_position	24	static
