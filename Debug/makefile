@@ -58,7 +58,7 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := frdmmcxn947_lwip_ping_freertos
+BUILD_ARTIFACT_NAME := funpack_lwip_peripherals
 BUILD_ARTIFACT_EXTENSION := axf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
@@ -70,24 +70,24 @@ all:
 	+@$(MAKE) --no-print-directory main-build && $(MAKE) --no-print-directory post-build
 
 # Main-build Target
-main-build: frdmmcxn947_lwip_ping_freertos.axf
+main-build: funpack_lwip_peripherals.axf
 
 # Tool invocations
-frdmmcxn947_lwip_ping_freertos.axf: $(OBJS) $(USER_OBJS) makefile $(OPTIONAL_TOOL_DEPS)
+funpack_lwip_peripherals.axf: $(OBJS) $(USER_OBJS) makefile $(OPTIONAL_TOOL_DEPS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: MCU Linker'
-	arm-none-eabi-gcc -nostdlib -Xlinker -no-warn-rwx-segments -Xlinker -Map="frdmmcxn947_lwip_ping_freertos.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -Xlinker --sort-section=alignment -Xlinker --cref -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -T frdmmcxn947_lwip_ping_freertos_Debug.ld -u _printf_float -u _scanf_float -o "frdmmcxn947_lwip_ping_freertos.axf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-gcc -nostdlib -Xlinker -no-warn-rwx-segments -Xlinker -Map="funpack_lwip_peripherals.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -Xlinker --sort-section=alignment -Xlinker --cref -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -T frdmmcxn947_lwip_ping_freertos_Debug.ld -u _printf_float -u _scanf_float -o "funpack_lwip_peripherals.axf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) frdmmcxn947_lwip_ping_freertos.axf
+	-$(RM) funpack_lwip_peripherals.axf
 	-@echo ' '
 
 post-build:
 	-@echo 'Performing post-build steps'
-	-arm-none-eabi-size "frdmmcxn947_lwip_ping_freertos.axf"; # arm-none-eabi-objcopy -v -O binary "frdmmcxn947_lwip_ping_freertos.axf" "frdmmcxn947_lwip_ping_freertos.bin" ; # checksum -p MCXN947 -d "frdmmcxn947_lwip_ping_freertos.bin";
+	-arm-none-eabi-size "funpack_lwip_peripherals.axf"; # arm-none-eabi-objcopy -v -O binary "funpack_lwip_peripherals.axf" "funpack_lwip_peripherals.bin" ; # checksum -p MCXN947 -d "funpack_lwip_peripherals.bin";
 	-@echo ' '
 
 .PHONY: all clean dependents main-build post-build

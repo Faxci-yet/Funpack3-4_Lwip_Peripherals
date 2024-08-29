@@ -48,7 +48,7 @@
 #include "fsl_silicon_id.h"
 #endif
 #include "fsl_phy.h"
-
+#include "fsl_pwm.h"
 #include "fsl_enet.h"
 #include "fsl_phylan8741.h"
 
@@ -210,6 +210,15 @@ extern phy_lan8741_resource_t g_phy_resource;
 #ifndef EXAMPLE_I3C_PP_BAUDRATE
 #define EXAMPLE_I3C_PP_BAUDRATE 4000000
 #endif
+
+#define BOARD_PWM_BASEADDR        PWM1
+#define PWM_SRC_CLK_FREQ          CLOCK_GetFreq(kCLOCK_BusClk)
+#define DEMO_PWM_FAULT_LEVEL      true
+#define APP_DEFAULT_PWM_FREQUENCE (10000UL)
+/* Definition for default PWM frequence in hz. */
+#ifndef APP_DEFAULT_PWM_FREQUENCE
+#define APP_DEFAULT_PWM_FREQUENCE (1000UL)
+#endif
 /*******************************************************************************
  * Prototypes
  ******************************************************************************/
@@ -236,6 +245,8 @@ static TaskHandle_t led_red_task_Handle = NULL;
 static TaskHandle_t led_blue_task_Handle = NULL;
 static TaskHandle_t touch_task_Handle = NULL;
 static TaskHandle_t sw_task_Handle = NULL;
+void PWM_Init_all(void);
+static void pwm_task(void *pvParameters);
 /*******************************************************************************
  * Globals
  ******************************************************************************/
@@ -245,7 +256,9 @@ status_t result = kStatus_Success;
 double temperature = 0.0;
 struct netconn *conn,*newconn;
 int ret;
-
+int pwmVal = 4;
+char toward_char[2] = {'+','-'};
+uint8_t toward_flag = 0;
 #define hello_task_PRIORITY (configMAX_PRIORITIES - 1)
 /*******************************************************************************
  * Variables
@@ -260,7 +273,7 @@ volatile status_t g_completionStatus;
 volatile bool g_masterCompletionFlag;
 i3c_master_handle_t g_i3c_m_handle;
 p3t1755_handle_t p3t1755Handle;
-char data_uart[15] = "000 000 000 000";
+char data_uart[16] = "000 000 000 +000";
 
 const i3c_master_transfer_callback_t masterCallback = {
     .slave2Master = NULL, .ibiCallback = NULL, .transferComplete = i3c_master_callback};
@@ -268,6 +281,55 @@ const i3c_master_transfer_callback_t masterCallback = {
 /*******************************************************************************
  * Code
  ******************************************************************************/
+static void PWM_DRV_Init3PhPwm(void)
+{
+    uint16_t deadTimeVal;
+    pwm_signal_param_t pwmSignal[2];
+    uint32_t pwmSourceClockInHz;
+    uint32_t pwmFrequencyInHz = APP_DEFAULT_PWM_FREQUENCE;
+
+    pwmSourceClockInHz = PWM_SRC_CLK_FREQ;
+
+    /* Set deadtime count, we set this to about 650ns */
+    deadTimeVal = ((uint64_t)pwmSourceClockInHz * 650) / 1000000000;
+
+    pwmSignal[0].pwmChannel       = kPWM_PwmA;
+    pwmSignal[0].level            = kPWM_HighTrue;
+    pwmSignal[0].dutyCyclePercent = 50; /* 1 percent dutycycle */
+    pwmSignal[0].deadtimeValue    = deadTimeVal;
+    pwmSignal[0].faultState       = kPWM_PwmFaultState0;
+    pwmSignal[0].pwmchannelenable = true;
+
+    pwmSignal[1].pwmChannel = kPWM_PwmB;
+    pwmSignal[1].level      = kPWM_HighTrue;
+    /* Dutycycle field of PWM B does not matter as we are running in PWM A complementary mode */
+    pwmSignal[1].dutyCyclePercent = 50;
+    pwmSignal[1].deadtimeValue    = deadTimeVal;
+    pwmSignal[1].faultState       = kPWM_PwmFaultState0;
+    pwmSignal[1].pwmchannelenable = true;
+
+    /*********** PWMA_SM0 - phase A, configuration, setup 2 channel as an example ************/
+    PWM_SetupPwm(BOARD_PWM_BASEADDR, kPWM_Module_0, pwmSignal, 2, kPWM_SignedCenterAligned, pwmFrequencyInHz,
+                 pwmSourceClockInHz);
+
+    /*********** PWMA_SM1 - phase B configuration, setup PWM A channel only ************/
+#ifdef DEMO_PWM_CLOCK_DEVIDER
+    PWM_SetupPwm(BOARD_PWM_BASEADDR, kPWM_Module_1, pwmSignal, 1, kPWM_SignedCenterAligned, pwmFrequencyInHz,
+                 pwmSourceClockInHz / (1 << DEMO_PWM_CLOCK_DEVIDER));
+#else
+    PWM_SetupPwm(BOARD_PWM_BASEADDR, kPWM_Module_1, pwmSignal, 1, kPWM_SignedCenterAligned, pwmFrequencyInHz,
+                 pwmSourceClockInHz);
+#endif
+
+    /*********** PWMA_SM2 - phase C configuration, setup PWM A channel only ************/
+#ifdef DEMO_PWM_CLOCK_DEVIDER
+    PWM_SetupPwm(BOARD_PWM_BASEADDR, kPWM_Module_2, pwmSignal, 1, kPWM_SignedCenterAligned, pwmFrequencyInHz,
+                 pwmSourceClockInHz / (1 << DEMO_PWM_CLOCK_DEVIDER));
+#else
+    PWM_SetupPwm(BOARD_PWM_BASEADDR, kPWM_Module_2, pwmSignal, 1, kPWM_SignedCenterAligned, pwmFrequencyInHz,
+                 pwmSourceClockInHz);
+#endif
+}
 static void MDIO_Init(void)
 {
     (void)CLOCK_EnableClock(s_enetClock[ENET_GetInstance(EXAMPLE_ENET_BASE)]);
@@ -329,8 +391,8 @@ static void client(void *thread_param)
 					{
 						netbuf_data(buf, &data, &len);
 						err= netconn_write(newconn, data, len, NETCONN_COPY);
-						strncpy(data_uart,data,15);
-						data_uart[15] = '\0';
+						strncpy(data_uart,data,16);
+						data_uart[16] = '\0';
 						PRINTF(data_uart);
 //						PRINTF("\r\nstring len = %d\r\n",strlen(data_uart));
 						if (err != ERR_OK)
@@ -587,6 +649,13 @@ static void stack_init(void *arg)
    		while (1)
    			;
    	}
+    if (xTaskCreate(pwm_task, "pwm_task", configMINIMAL_STACK_SIZE + 256, NULL, INIT_THREAD_PRIO, NULL) !=
+   		pdPASS)
+   	{
+   		PRINTF("Task creation failed!.\r\n");
+   		while (1)
+   			;
+   	}
     vTaskDelete(NULL);
 }
 
@@ -614,6 +683,7 @@ int main(void)
     LED_GREEN_INIT(LOGIC_LED_OFF);
     LED_BLUE_INIT(LOGIC_LED_OFF);
     P3T1755_I3C_Init();
+    PWM_Init_all();
     NT_OSA_Init();
 
     if ((result = nt_init(&System_0, nt_memory_pool, sizeof(nt_memory_pool))) != NT_SUCCESS)
@@ -960,7 +1030,7 @@ static void p3t1755_task(void *pvParameters)
 
 	for(;;)
     {
-    	char temperature_str[20];
+    	char temperature_str[23];
 		uint32_t ulReturn;
 		ulReturn = taskENTER_CRITICAL_FROM_ISR();
     	result = P3T1755_ReadTemperature(&p3t1755Handle, &temperature);
@@ -969,7 +1039,7 @@ static void p3t1755_task(void *pvParameters)
         {
             PRINTF("\r\nP3T1755 read temperature failed.\r\n");
         }
-    	sprintf(temperature_str,"Temperature:%.2f",temperature);
+    	sprintf(temperature_str,"Temperature:%.2f,PWM %d",temperature,pwmVal);
     	if(newconn != NULL)
     		ret = netconn_write(newconn,temperature_str,strlen(temperature_str),0);
     	sprintf(temperature_str,"\r\nTemperature:%.2f \r\n",temperature);
@@ -977,6 +1047,55 @@ static void p3t1755_task(void *pvParameters)
 //        SDK_DelayAtLeastUs(1000000, CLOCK_GetCoreSysClkFreq());
 
         vTaskDelay(2000);
+    }
+}
+
+static void pwm_task(void *pvParameters)
+{
+	pwm_config_t pwmConfig;
+    pwm_fault_param_t faultConfig;
+
+    char toward[1]="+";
+    char pwm_val[4] = "+000";
+    char buffer[5] = "+ 000";
+    // PWM_Init_all();
+
+    for (;;)
+    {
+//        strncpy(toward,data_uart+12,1);
+        strncpy(pwm_val,data_uart+12,4);
+        /* Delay at least 100 PWM periods. */
+        // SDK_DelayAtLeastUs((1000000U / APP_DEFAULT_PWM_FREQUENCE) * 100, SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY);
+        pwmVal = atoi(pwm_val);
+
+        /* Reset the duty cycle percentage */
+
+        if(pwmVal>=0)
+        {
+            toward_flag = 0;
+            if(pwmVal > 100)
+            	pwmVal = 100;
+            if(pwmVal < 4)
+            	pwmVal = 4;
+		/* Update duty cycles for all 3 PWM signals */
+        	PWM_UpdatePwmDutycycle(BOARD_PWM_BASEADDR, kPWM_Module_0, kPWM_PwmA, kPWM_SignedCenterAligned, abs(pwmVal)); // p2_4
+        	PWM_UpdatePwmDutycycle(BOARD_PWM_BASEADDR, kPWM_Module_1, kPWM_PwmA, kPWM_SignedCenterAligned, (0 >> 1)); // p2_6
+        // PWM_UpdatePwmDutycycle(BOARD_PWM_BASEADDR, kPWM_Module_2, kPWM_PwmA, kPWM_SignedCenterAligned, (pwmVal >> 2));
+        }
+        else
+        {
+            toward_flag = 1;
+            if(pwmVal < -100)
+            	pwmVal = -100;
+            if(pwmVal > -4)
+            	pwmVal = -4;
+        	/* Update duty cycles for all 3 PWM signals */
+			PWM_UpdatePwmDutycycle(BOARD_PWM_BASEADDR, kPWM_Module_0, kPWM_PwmA, kPWM_SignedCenterAligned, 0); // p2_4
+			PWM_UpdatePwmDutycycle(BOARD_PWM_BASEADDR, kPWM_Module_1, kPWM_PwmA, kPWM_SignedCenterAligned, (abs(pwmVal) >> 1)); // p2_6
+        }
+        /* Set the load okay bit for all submodules to load registers from their buffer */
+        PWM_SetPwmLdok(BOARD_PWM_BASEADDR, kPWM_Control_Module_0 | kPWM_Control_Module_1 | kPWM_Control_Module_2, true);
+        vTaskDelay(10);
     }
 }
 
@@ -1413,3 +1532,110 @@ void P3T1755_I3C_Init(void)
 
 
 }
+
+void PWM_Init_all(void)
+{
+    pwm_config_t pwmConfig;
+    pwm_fault_param_t faultConfig;
+    uint32_t pwmVal = 4;
+    /* Board pin, clock, debug console init */
+    /* attach FRO 12M to FLEXCOMM4 (debug console) */
+    CLOCK_SetClkDiv(kCLOCK_DivFlexcom4Clk, 1u);
+    CLOCK_AttachClk(BOARD_DEBUG_UART_CLK_ATTACH);
+
+    BOARD_InitPins();
+    BOARD_InitBootClocks();
+    BOARD_InitDebugConsole();
+
+    /* Enable PWM1 SUB Clockn */
+    SYSCON->PWM1SUBCTL |=
+        (SYSCON_PWM1SUBCTL_CLK0_EN_MASK | SYSCON_PWM1SUBCTL_CLK1_EN_MASK | SYSCON_PWM1SUBCTL_CLK2_EN_MASK);
+
+    PRINTF("FlexPWM driver example\n");
+
+    /*
+     * pwmConfig.enableDebugMode = false;
+     * pwmConfig.enableWait = false;
+     * pwmConfig.reloadSelect = kPWM_LocalReload;
+     * pwmConfig.clockSource = kPWM_BusClock;
+     * pwmConfig.prescale = kPWM_Prescale_Divide_1;
+     * pwmConfig.initializationControl = kPWM_Initialize_LocalSync;
+     * pwmConfig.forceTrigger = kPWM_Force_Local;
+     * pwmConfig.reloadFrequency = kPWM_LoadEveryOportunity;
+     * pwmConfig.reloadLogic = kPWM_ReloadImmediate;
+     * pwmConfig.pairOperation = kPWM_Independent;
+     */
+    PWM_GetDefaultConfig(&pwmConfig);
+
+#ifdef DEMO_PWM_CLOCK_DEVIDER
+    pwmConfig.prescale = DEMO_PWM_CLOCK_DEVIDER;
+#endif
+
+    /* Use full cycle reload */
+    pwmConfig.reloadLogic = kPWM_ReloadPwmFullCycle;
+    /* PWM A & PWM B form a complementary PWM pair */
+    pwmConfig.pairOperation   = kPWM_ComplementaryPwmA;
+    pwmConfig.enableDebugMode = true;
+
+    /* Initialize submodule 0 */
+    if (PWM_Init(BOARD_PWM_BASEADDR, kPWM_Module_0, &pwmConfig) == kStatus_Fail)
+    {
+        PRINTF("PWM initialization failed\n");
+        return 1;
+    }
+
+    /* Initialize submodule 1, make it use same counter clock as submodule 0. */
+    pwmConfig.clockSource           = kPWM_Submodule0Clock;
+    pwmConfig.prescale              = kPWM_Prescale_Divide_1;
+    pwmConfig.initializationControl = kPWM_Initialize_MasterSync;
+    if (PWM_Init(BOARD_PWM_BASEADDR, kPWM_Module_1, &pwmConfig) == kStatus_Fail)
+    {
+        PRINTF("PWM initialization failed\n");
+        return 1;
+    }
+
+    /* Initialize submodule 2 the same way as submodule 1 */
+    if (PWM_Init(BOARD_PWM_BASEADDR, kPWM_Module_2, &pwmConfig) == kStatus_Fail)
+    {
+        PRINTF("PWM initialization failed\n");
+        return 1;
+    }
+
+    /*
+     *   config->faultClearingMode = kPWM_Automatic;
+     *   config->faultLevel = false;
+     *   config->enableCombinationalPath = true;
+     *   config->recoverMode = kPWM_NoRecovery;
+     */
+    PWM_FaultDefaultConfig(&faultConfig);
+
+#ifdef DEMO_PWM_FAULT_LEVEL
+    faultConfig.faultLevel = DEMO_PWM_FAULT_LEVEL;
+#endif
+
+    /* Sets up the PWM fault protection */
+    PWM_SetupFaults(BOARD_PWM_BASEADDR, kPWM_Fault_0, &faultConfig);
+    PWM_SetupFaults(BOARD_PWM_BASEADDR, kPWM_Fault_1, &faultConfig);
+    PWM_SetupFaults(BOARD_PWM_BASEADDR, kPWM_Fault_2, &faultConfig);
+    PWM_SetupFaults(BOARD_PWM_BASEADDR, kPWM_Fault_3, &faultConfig);
+
+    /* Set PWM fault disable mapping for submodule 0/1/2 */
+    PWM_SetupFaultDisableMap(BOARD_PWM_BASEADDR, kPWM_Module_0, kPWM_PwmA, kPWM_faultchannel_0,
+                             kPWM_FaultDisable_0 | kPWM_FaultDisable_1 | kPWM_FaultDisable_2 | kPWM_FaultDisable_3);
+    PWM_SetupFaultDisableMap(BOARD_PWM_BASEADDR, kPWM_Module_1, kPWM_PwmA, kPWM_faultchannel_0,
+                             kPWM_FaultDisable_0 | kPWM_FaultDisable_1 | kPWM_FaultDisable_2 | kPWM_FaultDisable_3);
+    PWM_SetupFaultDisableMap(BOARD_PWM_BASEADDR, kPWM_Module_2, kPWM_PwmA, kPWM_faultchannel_0,
+                             kPWM_FaultDisable_0 | kPWM_FaultDisable_1 | kPWM_FaultDisable_2 | kPWM_FaultDisable_3);
+
+    /* Call the init function with demo configuration */
+    PWM_DRV_Init3PhPwm();
+
+    /* Set the load okay bit for all submodules to load registers from their buffer */
+    PWM_SetPwmLdok(BOARD_PWM_BASEADDR, kPWM_Control_Module_0 | kPWM_Control_Module_1 | kPWM_Control_Module_2, true);
+
+    /* Start the PWM generation from Submodules 0, 1 and 2 */
+    PWM_StartTimer(BOARD_PWM_BASEADDR, kPWM_Control_Module_0 | kPWM_Control_Module_1 | kPWM_Control_Module_2);
+}
+
+
+

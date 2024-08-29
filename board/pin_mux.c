@@ -71,6 +71,8 @@ BOARD_InitPins:
     pull_enable: enable}
   - {pin_num: F6, peripheral: I3C1, signal: SDA, pin_signal: PIO1_16/WUU0_IN14/FC5_P0/FC3_P4/CT_INP12/SCT0_OUT6/FLEXIO0_D24/PLU_OUT4/ENET0_RXD2/I3C1_SDA/ADC1_A16,
     pull_select: up, pull_enable: enable}
+  - {pin_num: K2, peripheral: PWM1, signal: 'A, 0', pin_signal: PIO2_6/TRIG_IN4/FC9_P4/SDHC0_D3/SCT0_OUT4/PWM1_A0/FLEXIO0_D14/FLEXSPI0_B_DATA2/SINC0_MCLK2/SAI0_TX_BCLK}
+  - {pin_num: K3, peripheral: PWM1, signal: 'A, 1', pin_signal: PIO2_4/WUU0_IN17/FC9_P0/SDHC0_CLK/SCT0_OUT2/PWM1_A1/FLEXIO0_D12/FLEXSPI0_B_DATA0/SINC0_MCLK1/SAI0_RXD1}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 /* clang-format on */
@@ -91,6 +93,8 @@ void BOARD_InitPins(void)
     CLOCK_EnableClock(kCLOCK_Port0);
     /* Enables the clock for PORT1: Enables clock */
     CLOCK_EnableClock(kCLOCK_Port1);
+    /* Enables the clock for PORT2: Enables clock */
+    CLOCK_EnableClock(kCLOCK_Port2);
 
     gpio_pin_config_t LED_RED_config = {
         .pinDirection = kGPIO_DigitalOutput,
@@ -443,6 +447,26 @@ void BOARD_InitPins(void)
                                              kPORT_UnlockRegister};
     /* PORT1_9 (pin B1) is configured as FC4_P1 */
     PORT_SetPinConfig(BOARD_INITPINS_DEBUG_UART_TX_PORT, BOARD_INITPINS_DEBUG_UART_TX_PIN, &DEBUG_UART_TX);
+
+    /* PORT2_4 (pin K3) is configured as PWM1_A1 */
+    PORT_SetPinMux(PORT2, 4U, kPORT_MuxAlt5);
+
+    PORT2->PCR[4] = ((PORT2->PCR[4] &
+                      /* Mask bits to zero which are setting */
+                      (~(PORT_PCR_IBE_MASK)))
+
+                     /* Input Buffer Enable: Enables. */
+                     | PORT_PCR_IBE(PCR_IBE_ibe1));
+
+    /* PORT2_6 (pin K2) is configured as PWM1_A0 */
+    PORT_SetPinMux(PORT2, 6U, kPORT_MuxAlt5);
+
+    PORT2->PCR[6] = ((PORT2->PCR[6] &
+                      /* Mask bits to zero which are setting */
+                      (~(PORT_PCR_IBE_MASK)))
+
+                     /* Input Buffer Enable: Enables. */
+                     | PORT_PCR_IBE(PCR_IBE_ibe1));
 }
 /***********************************************************************************************************************
  * EOF

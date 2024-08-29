@@ -2,7 +2,7 @@
 ../touch/source/modules/nt_module_gpio.c:152:16:_nt_module_gpio_electrode_disable	0	static
 ../touch/source/modules/nt_module_gpio.c:178:16:nt_gpio_check_interface	0	static
 ../touch/source/modules/nt_module_gpio.c:161:16:_nt_module_gpio_change_mode	32	static
-e:\codedzb\mcuxpressoide_11.9.0_2144\workspace\frdmmcxn947_lwip_ping_freertos\touch\source\modules\nt_modules_prv.h:186:20:_nt_module_set_flag	32	static
+e:\codedzb\mcuxpressoide_11.9.0_2144\workspace\funpack_lwip_peripherals\touch\source\modules\nt_modules_prv.h:186:20:_nt_module_set_flag	32	static
 ../touch/source/modules/nt_module_gpio.c:79:16:_nt_module_gpio_trigger	8	static
 ../touch/source/modules/nt_module_gpio.c:85:16:_nt_module_gpio_process	48	static
 ../touch/source/modules/nt_module_gpio.c:235:9:nt_gpio_data_check	8	static
