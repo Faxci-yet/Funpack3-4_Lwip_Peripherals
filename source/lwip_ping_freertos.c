@@ -358,18 +358,14 @@ void substring(char *src, char *dest, int start, int length) {
 }
 
 
-static void client(void *thread_param)
+static void server(void *thread_param)
 {
-//    struct netconn *conn;
-//	struct netconn *newconn;
-//    int ret;
     char temperature_str[20];
     err_t err;
     ip4_addr_t ipaddr;
     uint8_t send_buf[]= "Hello PC Client! \n";
-//    char data_uart[15] = "";
     uint32_t ulReturn;
-
+        /* Create a new connection handle */
         conn = netconn_new(NETCONN_TCP);
         netconn_bind(conn, IP_ADDR_ANY, 5001);
         LWIP_ERROR("tcpecho: invalid conn", (conn != NULL), return;);
@@ -377,14 +373,16 @@ static void client(void *thread_param)
         while (1)
         {
         	err = netconn_accept(conn, &newconn);
-        	if(err == ERR_OK)
+        	/* Accept the new connection */
+            if(err == ERR_OK)
         	{
         		PRINTF("\r\nnew connect\r\n");
-        		netconn_write(newconn, send_buf, strlen(send_buf), 0);
+                netconn_write(newconn, send_buf, strlen(send_buf), 0);
         		struct netbuf *buf;
 				void *data;
 
 				u16_t len;
+                /* Receive & transmit data */
 				while ((err = netconn_recv(newconn, &buf)) == ERR_OK)
 				{
 					do
@@ -394,11 +392,9 @@ static void client(void *thread_param)
 						strncpy(data_uart,data,16);
 						data_uart[16] = '\0';
 						PRINTF(data_uart);
-//						PRINTF("\r\nstring len = %d\r\n",strlen(data_uart));
 						if (err != ERR_OK)
 						{
 							PRINTF("tcpecho: netconn_write: error \"%s\"\n",lwip_strerr(err));
-
 						}
 					}while(netbuf_next(buf) >= 0);
 					netbuf_delete(buf);
@@ -417,7 +413,7 @@ static void client(void *thread_param)
 
 void client_init(void)
 {
-    sys_thread_new("client", client, NULL, 1024, INIT_THREAD_PRIO);
+    sys_thread_new("server", server, NULL, 1024, INIT_THREAD_PRIO);
 }
 
 static void i3c_master_callback(I3C_Type *base, i3c_master_handle_t *handle, status_t status, void *userData)
@@ -999,6 +995,16 @@ static void touch_pad_task(void *pvParameters)
 //        FMSTR_Poll();
 
 
+    }
+}
+static void touch_pad_task(void *pvParameters)
+{
+//	uint32_t ulReturn;
+
+	for (;;)
+    {
+		nt_task();
+        vTaskDelay(10);
     }
 }
 
