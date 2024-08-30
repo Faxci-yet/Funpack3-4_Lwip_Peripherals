@@ -997,16 +997,7 @@ static void touch_pad_task(void *pvParameters)
 
     }
 }
-static void touch_pad_task(void *pvParameters)
-{
-//	uint32_t ulReturn;
 
-	for (;;)
-    {
-		nt_task();
-        vTaskDelay(10);
-    }
-}
 
 static void SW_task(void *pvParameters)
 {
